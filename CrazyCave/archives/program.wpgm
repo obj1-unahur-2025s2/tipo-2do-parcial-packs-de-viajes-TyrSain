@@ -1,0 +1,8 @@
+import wollok.game.*
+import core.*
+
+// Es el ejecutador del juego
+program run{
+    core.run()
+    game.start()
+}
