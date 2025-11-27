@@ -3,6 +3,6 @@ import core.*
 
 // Es el ejecutador del juego
 program run{
-    core.run()
+    core.initialSetup()
     game.start()
 }

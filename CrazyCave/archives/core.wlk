@@ -1,12 +1,17 @@
 import wollok.game.*
 import keys.*
 import map.*
+import menu.*
 
 // Es el que reune todos los metodos que moldean el juego
 object core {
-	method run(){
+	method initialSetup() {
 		game.title("Crazy Cave")
         self.setScreenSize(23, 16)
+		
+		gameMenu.show()
+	}
+	method run(){
         map.start()
         keys.setKeys()
 	}
