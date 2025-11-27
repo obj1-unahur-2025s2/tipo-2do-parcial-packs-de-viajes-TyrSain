@@ -63,11 +63,13 @@ object obstacles {
 	}
 	
 	method showObstacles(){
-		obstacles.forEach({ obstacle => self.placeRecursively(obstacle) })
+		obstacles.forEach({ obstacle => self.placeRecursively(obstacle, 0) })
 		
 	}
 	
-	method placeRecursively(obstacle) {
+	method placeRecursively(obstacle, intent) {
+		//para limitar la cantidad de intentos de colocacion y evitar loops infinitos
+		if (intent > 2){}
 		const limitX = game.width() - 1
 		const limitY = game.height() - 2
 		
@@ -76,12 +78,13 @@ object obstacles {
 		    1.randomUpTo(limitY).truncate(0)
 		)	
 		
-		if (utilities.isFreePosition(position)) {
+		//se utiliza la posicion estricta, para contabilizar no solamente los obstaculos, sino tambien el minero y el golem
+		if (utilities.isFreePositionStrict(position)) {
 			obstacle.position(position)
 			obstacle.show()
 			obstacles.remove(obstacle)
 		} else {
-			self.placeRecursively(obstacle)
+			self.placeRecursively(obstacle, intent + 1)
 		}
 	}
 	

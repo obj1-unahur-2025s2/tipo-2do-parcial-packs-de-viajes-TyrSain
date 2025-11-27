@@ -11,6 +11,7 @@ object core {
 		
 		gameMenu.show()
 	}
+	
 	method run(){
         map.start()
         keys.setKeys()

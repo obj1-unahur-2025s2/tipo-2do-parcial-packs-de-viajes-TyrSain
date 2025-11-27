@@ -1,6 +1,8 @@
 import wollok.game.*
 import player.*
 import entitys.*
+import map.*
+import win.*
 
 // La clase para los corazones
 class HeartVisual {
@@ -87,7 +89,18 @@ object score {
     method increaseScore(points) {
         score +=  points
         self.drawScore()
+		if (self.score() >= 500){
+			self.win()
+		}
     }
+
+	method win(){
+		game.schedule(3000, {
+			game.removeTickEvent("golem_ai")
+			map.clearLevel()
+			win.show()
+			})
+	}
 
     method decreaseScore(points){
         score = 0.max(score - points)

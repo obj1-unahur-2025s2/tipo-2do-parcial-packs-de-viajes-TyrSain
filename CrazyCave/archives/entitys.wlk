@@ -6,6 +6,9 @@ import hud.*
 import utilities.*
 import items.*
 import inventory.*
+import gameover.*
+import win.*
+import map.*
 
 
 // Es la clase "madre" de tolos las entidades del juego, de donde heredan las demas
@@ -334,9 +337,6 @@ class Miner inherits MovableEntity{
 		else if (situation == "hitByGolem"){
 			score.decreaseScore(200)
 		}
-		else if(situation == "die"){
-			score.decreaseScore(300)
-		}
 	}
 	
 	override method onHitByExplosion(hp){
@@ -358,10 +358,14 @@ class Miner inherits MovableEntity{
 	}
 	
 	method die(){
-		self.modifyScoreWhen("die")
-		game.removeVisual(self)
-		game.schedule(3000, {game.stop()})
+		game.schedule(3000, {
+			game.removeVisual(self)
+			map.clearLevel()
+			gameOver.show()
+			})
 	}
+
+	
 }
 
 // El golem y sus funciones
